@@ -26,6 +26,16 @@ class Todotxt(MycroftSkill):
             sleep(2)
         file.close()
 
+    @intent_file_handler('add.to.list.intent')
+    def handle_add_to_todo_intent(self, message):
+        file = open(self.file_path, 'a')
+        item_to_add = message.data.get('item')
+        full_item = item_to_add + " @from_mycroft"
+        file.write(full_item)
+        file.write("\n")
+        file.close()
+        self.speak("Adding %s to your to do list" % item_to_add)
+
 def stop(self):
     pass
 
